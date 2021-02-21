@@ -1,0 +1,56 @@
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: pod-validation
+webhooks:
+  - name: admission-server.default.svc
+    clientConfig:
+      service:
+        name: admission-server
+        namespace: default
+        path: "/validate/pods"
+      caBundle: "${CA_BUNDLE}"
+    rules:
+      - operations: ["CREATE"]
+        apiGroups: [""]
+        apiVersions: ["v1"]
+        resources: ["pods"]
+    failurePolicy: Ignore
+---
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: deployment-validation
+webhooks:
+  - name: admission-server.default.svc
+    clientConfig:
+      service:
+        name: admission-server
+        namespace: default
+        path: "/validate/deployments"
+      caBundle: "${CA_BUNDLE}"
+    rules:
+      - operations: ["CREATE","DELETE"]
+        apiGroups: ["apps"]
+        apiVersions: ["v1"]
+        resources: ["deployments"]
+    failurePolicy: Ignore
+---
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: pod-mutation
+webhooks:
+  - name: admission-server.default.svc
+    clientConfig:
+      service:
+        name: admission-server
+        namespace: default
+        path: "/mutate/pods"
+      caBundle: "${CA_BUNDLE}"
+    rules:
+      - operations: ["CREATE"]
+        apiGroups: [""]
+        apiVersions: ["v1"]
+        resources: ["pods"]
+    failurePolicy: Ignore
