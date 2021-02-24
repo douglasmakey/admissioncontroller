@@ -16,7 +16,7 @@ Kubernetes admission Controller Phases:
 
 At the root level, we have defined some core structs.
 
-In `admission.go` we have two main structs: `AdmitFunc` , `Hook`, and `Result`.
+In `admission.go` we have the main structs: `AdmitFunc` , `Hook`, and `Result`.
 
 `AdmitFunc` is a function type that defines how to process an admission request. It is where you define
 the validations or mutations for a specific request. You will see some examples in `deployments` and `pods` packages.
@@ -68,6 +68,8 @@ hook := admissioncontroller.Hook{Create: myValidationFunction}
 // webhook with multiple operations [CREATE,DELETE]
 hook := admissioncontroller.Hook{Create: createValidation, Delete: deleteValidation}
 ```
+
+In `patch.go` we have the struct and function for JSON patch operation.
 
 `PatchOperation` represents a JSON patch operation.
 
