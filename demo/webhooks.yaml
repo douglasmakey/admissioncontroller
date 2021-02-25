@@ -3,7 +3,7 @@ kind: ValidatingWebhookConfiguration
 metadata:
   name: pod-validation
 webhooks:
-  - name: admission-server.default.svc
+  - name: pod-validation.default.svc
     clientConfig:
       service:
         name: admission-server
@@ -22,7 +22,7 @@ kind: ValidatingWebhookConfiguration
 metadata:
   name: deployment-validation
 webhooks:
-  - name: admission-server.default.svc
+  - name: deployment-validation.default.svc
     clientConfig:
       service:
         name: admission-server
@@ -41,7 +41,7 @@ kind: MutatingWebhookConfiguration
 metadata:
   name: pod-mutation
 webhooks:
-  - name: admission-server.default.svc
+  - name: pod-mutation.default.svc
     clientConfig:
       service:
         name: admission-server

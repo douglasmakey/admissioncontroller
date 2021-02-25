@@ -46,7 +46,7 @@ apiVersion: admissionregistration.k8s.io/v1beta1
 kind: ValidatingWebhookConfiguration
 ...
 webhooks:
-  - name: admission-server.default.svc
+  - name: pod-validation.default.svc
     clientConfig:
       service:
         ...
