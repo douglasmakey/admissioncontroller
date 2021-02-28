@@ -24,7 +24,7 @@ type Hook struct {
 	Connect AdmitFunc
 }
 
-// Execute evaluates the request, and it will try to execute the operation specified in the request
+// Execute evaluates the request and try to execute the function for operation specified in the request.
 func (h *Hook) Execute(r *admission.AdmissionRequest) (*Result, error) {
 	switch r.Operation {
 	case admission.Create:

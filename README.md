@@ -211,8 +211,8 @@ the admission controller in a k8s cluster.
 
 **Note: `demo/deploy.sh` is just for develop/test environment. It was not intended for production.**
 
-A cluster on which this example can be tested must be running Kubernetes 1.9.0 or above. The cluster should have
-the admissionregistration.k8s.io/v1beta1 API enabled. You can verify that using the following command:
+A cluster on which this example can be tested should have the admissionregistration.k8s.io/v1beta1 API enabled. You can
+verify that using the following command:
 
 ```
 kubectl api-versions
@@ -221,10 +221,8 @@ admissionregistration.k8s.io/v1beta1
 ...
 ```
 
-If you want to use a mutation admission, the `MutatingAdmissionWebhook` admission controller should be added in the 
-admission-control flag of the kube-apiserver.
-
-You can check which admission controllers are activated inspecting the `kube-apiserver`
+You should check that `MutatingAdmissionWebhook` and `ValidatingAdmissionWebhook` are activated in your cluster
+inspecting the `kube-apiserver`
 
 ```text
 --enable-admission-plugins=..,MutatingAdmissionWebhook,ValidatingAdmissionWebhook.."
@@ -236,6 +234,10 @@ will create the following resources: `tls secret`, `Deployment`, and all the `Ad
 You can see all the created resources:
 
 ```shell
+kubectl get svc
+NAME               TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+admission-server   ClusterIP   10.43.120.27   <none>        443/TCP   1h
+
 kubectl get deployment
 NAME               READY   UP-TO-DATE   AVAILABLE   AGE
 admission-server   1/1     0            1           1h
