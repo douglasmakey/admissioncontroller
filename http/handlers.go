@@ -100,6 +100,6 @@ func (h *admissionHandler) Serve(hook admissioncontroller.Hook) http.HandlerFunc
 func healthz() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		return
+		w.Write([]byte("ok"))
 	}
 }

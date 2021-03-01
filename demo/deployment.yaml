@@ -21,7 +21,8 @@ spec:
         livenessProbe:
           httpGet:
             path: /healthz
-            port: http
+            port: 8443
+            scheme: HTTPS
         ports:
         - containerPort: 8443
         volumeMounts:
